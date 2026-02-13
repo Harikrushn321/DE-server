@@ -1,4 +1,8 @@
 const express = require("express");
+const buffer = require('buffer');
+if (!buffer.SlowBuffer) {
+    buffer.SlowBuffer = buffer.Buffer;
+}
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const path = require("path");
@@ -50,9 +54,8 @@ app.use((err, req, res, next) => {
     });
 });
 
-// Start server
 const PORT = process.env.PORT || 3500;
-const HOST = process.env.HOST || "127.0.0.1";
-app.listen(PORT, HOST, () => {
-    console.log(`Server running on http://${HOST}:${PORT}`);
+
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });
